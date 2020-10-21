@@ -73,7 +73,6 @@ main{
 }
 /*color find*/
 #color{
-    position: absolute;
     height: 350px;
     margin-top: 2px;
     display: flex;
@@ -105,7 +104,7 @@ main{
 }
 /*footer*/
 footer{
-    /*position: absolute;*/
+    position: absolute;
     bottom: 0;
     width: 100%;
     background: white;
