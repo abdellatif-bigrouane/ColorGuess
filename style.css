@@ -252,6 +252,9 @@ footer .row{
     .container-fluid{
         width: 95%;
     } 
+    footer{
+        position: initial;
+    }
 }
 @media (max-width : 992px) and (min-width :768px){
     .container-fluid{
