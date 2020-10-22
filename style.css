@@ -257,7 +257,7 @@ footer .row{
         width: 40px;
     }
     #color{
-        height: 180px;
+       max-height: 180px;
     }
 }
 @media (max-width : 768px){
