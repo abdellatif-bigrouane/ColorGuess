@@ -8,7 +8,8 @@ addEventListener('load', ()=>{
 });
 
 let rd = 1;
-let score = 0;
+var score = 0;
+var timer;
 var interval = 255;
 
 function endGame(){
@@ -18,6 +19,7 @@ function endGame(){
         document.querySelector('.end').style.display = 'flex';
 
         clearInterval(loopMain);
+        setCookie('best',score,2);
     }
 }
 
@@ -68,11 +70,11 @@ function main(){
 
     //timer
     const time = document.getElementById('time');
-    var timer = 5;
+    timer = 5;
+    time.innerHTML =  timer;
+    clearInterval(loopTimer);
     loopTimer = setInterval(() => {
-        timer --;
-        if(timer==0) 
-            timer = 5;
+        timer--;
         time.innerHTML =  timer;
     }, 1000);
 
@@ -81,9 +83,10 @@ function main(){
     round.innerHTML = (rd++) + "/20"; 
 
     //score 
+    document.getElementById('score').innerHTML = score;
     function myScore(){
-        if(score < 0) 
-            score = 0;
+        // if(score < 0) 
+        //     score = 0;
 
         document.getElementById('score').innerHTML = score;
     }
@@ -92,9 +95,9 @@ function main(){
     for(const el of colorBtn){
         el.addEventListener('click',() => {
             if(el.style.backgroundColor == colorMain.style.backgroundColor){
-                //score 
-                score+=10;
-                myScore(); 
+                score 
+                score+=(timer*10);
+                myScore();
                 endGame();
 
                 cptLoopMain = 4000;
@@ -102,10 +105,10 @@ function main(){
                 loopMain = setInterval(main, cptLoopMain);
     
                 main();
-            }else{
-                score-=5;
-                myScore();
-            }
+            }//else if(el.style.backgroundColor != colorMain.style.backgroundColor){
+            //     score-=5;
+            //     myScore();
+            // }
         });
     }
     let cptLoopMain = 5000;
@@ -113,7 +116,9 @@ function main(){
 
 //change color evry 5s
 var loopMain;
+var loopTimer;
 for(const el of document.querySelectorAll('#startbtn')){
+    
     el.addEventListener('click',() => {
         document.querySelector('main').style.filter = 'none';
         document.querySelector('.end').style.display = 'none';
@@ -128,3 +133,13 @@ for(const el of document.querySelectorAll('#startbtn')){
 }
 
 main();
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+document.querySelector('.copyright').addEventListener('click', function(){
+    alert(document.cookie);
+}) 
